@@ -1,8 +1,8 @@
 # NexaBank Enterprise Network Project
 
 ![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
-![Phase](https://img.shields.io/badge/Current%20Phase-3%20Security-blue)
-![Labs](https://img.shields.io/badge/Labs%20Complete-10%2F33-green)
+![Phase](https://img.shields.io/badge/Current%20Phase-4%20Branch%20Connectivity-blue)
+![Labs](https://img.shields.io/badge/Labs%20Complete-17%2F33-green)
 
 ---
 
@@ -10,7 +10,7 @@
 
 A complete enterprise network implementation for **NexaBank PLC**, a mid-sized commercial bank in Dhaka, Bangladesh. Built from scratch to mirror real-world bank and telecom infrastructure — covering network design, switching, routing, security, WAN connectivity, compliance and disaster recovery.
 
-This is not a tutorial copy-paste project. Every design decision is justified with real engineering reasoning, aligned with Bangladesh Bank ICT Security Guidelines, ISO 27001 and NIST CSF.
+This is not a tutorial copy-paste project. Every design decision is justified with real engineering reasoning, aligned with Bangladesh Bank ICT Security Guidelines, ISO 27001 and NIST CSF. Where Packet Tracer hit platform limitations, each lab documents the full production configuration for real Cisco hardware alongside a working alternative implementation — demonstrating engineering judgement, not just lab completion.
 
 ---
 
@@ -53,7 +53,7 @@ This is not a tutorial copy-paste project. Every design decision is justified wi
 | Role | Real World | Packet Tracer |
 |------|-----------|---------------|
 | Core Router | Cisco ISR 4331 | Cisco ISR 4331 |
-| Firewall | Cisco ASA 5506-X | Cisco ASA 5505 |
+| Firewall | Cisco ASA 5506-X | Cisco ASA 5505 / IOS ZBF on R1 |
 | Core Switch (L3) | Cisco Cat 3650 | Cisco Cat 3650 |
 | Access Switch (L2) | Cisco Cat 2960-X | Cisco Cat 2960 |
 | Servers | Dell PowerEdge R340 | Generic Server |
@@ -66,8 +66,8 @@ This is not a tutorial copy-paste project. Every design decision is justified wi
 |-------|-------------|------|--------|
 | Phase 1 | Network Design & Documentation | 01-03 | ✅ Complete |
 | Phase 2 | Head Office Core Network | 04-10 | ✅ Complete |
-| Phase 3 | Security Implementation | 11-17 | 🔄 In Progress |
-| Phase 4 | Branch Connectivity | 18-22 | ⏳ Pending |
+| Phase 3 | Security Implementation | 11-17 | ✅ Complete |
+| Phase 4 | Branch Connectivity | 18-22 | 🔄 In Progress |
 | Phase 5 | Advanced Services | 23-27 | ⏳ Pending |
 | Phase 6 | Compliance & Documentation | 28-30 | ⏳ Pending |
 | Phase 7 | Final Integration | 31-33 | ⏳ Pending |
@@ -93,6 +93,29 @@ This is not a tutorial copy-paste project. Every design decision is justified wi
 | 08 | Router Configuration & WAN | R1 — LAN/WAN interfaces, routing |
 | 09 | NAT & Internet Access | PAT — 500 devices, single public IP |
 | 10 | OSPF Multi-Area | Dynamic routing, self-healing network |
+
+### ✅ Phase 3 — Security Implementation
+| Lab | Title | Key Deliverable |
+|-----|-------|----------------|
+| 11 | Advanced ACLs | Port/protocol-based filtering, department isolation |
+| 12 | DMZ Architecture | WEB-SVR, ATM-GW, MAIL-SVR isolated from internal LAN |
+| 13 | DHCP Server & Snooping | Centralised IP assignment, rogue DHCP prevention |
+| 14 | Dynamic ARP Inspection | ARP spoofing / MITM attack prevention |
+| 15 | 802.1X & TACACS+ | Identity-based port auth, device management auth |
+| 16 | SSH Hardening | SSHv2, banners, timeouts on all HO devices |
+| 17 | Zone-Based Firewall | Stateful inspection — INSIDE/OUTSIDE/DMZ zones |
+
+---
+
+## Engineering Approach to Platform Limitations
+
+Several Phase 3 labs (13, 14, 15, 17) encountered genuine Cisco Packet Tracer platform constraints — not configuration errors. Rather than skip these topics, each lab documents:
+
+1. **Full production configuration** for real Cisco hardware (verified against Cisco documentation)
+2. **What was successfully demonstrated** in the PT simulation environment
+3. **A working alternative implementation** covering an adjacent, equally relevant technology
+
+This mirrors real-world engineering: working around tooling constraints while still delivering the required security outcome.
 
 ---
 
@@ -134,6 +157,15 @@ NexaBank-Enterprise-Network/
 │   ├── NexaBank_HO_Lab09_NAT.pkt
 │   └── NexaBank_HO_Lab10_OSPF.pkt
 ├── Phase-3-Security/
+│   ├── NexaBank_HO_Lab11_ACL.pkt
+│   ├── NexaBank_HO_Lab12_DMZ.pkt
+│   ├── NexaBank_HO_Lab13_DHCP.pkt
+│   ├── NexaBank_HO_Lab14_DAI.pkt
+│   ├── NexaBank_HO_Lab15_802.1X.pkt
+│   ├── NexaBank_HO_Lab15_TACACS.pkt
+│   ├── NexaBank_HO_Lab16_SSH_Hardening.pkt
+│   ├── NexaBank_HO_Lab17_ZBF.pkt
+│   └── *_Notes.docx (full documentation + production configs + pop quizzes)
 ├── Phase-4-Branch-Connectivity/
 ├── Phase-5-Advanced-Services/
 ├── Phase-6-Compliance/
